@@ -1,0 +1,53 @@
+cabal-version:      3.4
+name:               level01-foundations
+version:            0.1.0.0
+synopsis:           Haskell 教學系列 Level 1:初級
+build-type:         Simple
+
+-- 用參考解答建置(驗證測試用):cabal test level01-foundations -f solutions
+flag solutions
+  description: 用 answers/ 的參考解答取代 exercises/ 的習題骨架
+  default:     False
+  manual:      True
+
+common settings
+  default-language:   GHC2024
+  default-extensions: OverloadedStrings
+                      OverloadedRecordDot
+  ghc-options:        -Wall -Wcompat
+                      -Wincomplete-uni-patterns
+                      -Wincomplete-record-updates
+  build-depends:      base >=4.20 && <5
+                    , text
+                    , containers
+
+library
+  import:          settings
+  hs-source-dirs:  src
+  if flag(solutions)
+    hs-source-dirs: answers
+  else
+    hs-source-dirs: exercises
+  exposed-modules: Examples.Adventure
+                   Examples.WordCount
+                   Exercises.E01Basics
+                   Exercises.E02Functions
+                   Exercises.E03Lists
+                   Exercises.E04Adts
+                   Exercises.E05Classes
+                   Exercises.E06Text
+                   Exercises.E07IO
+
+executable wordcount
+  import:         settings
+  hs-source-dirs: app
+  main-is:        Main.hs
+  build-depends:  level01-foundations
+
+test-suite level01-tests
+  import:         settings
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is:        Main.hs
+  build-depends:  level01-foundations
+                , hspec >=2.11
