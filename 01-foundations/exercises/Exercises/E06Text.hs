@@ -20,11 +20,11 @@ import Data.Text qualified as T
 -- >>> shout "hello"
 -- "HELLO!"
 shout :: Text -> Text
-shout t = undefined
+shout t = T.toUpper t <> "!"
 
 -- | 數單字數。提示:T.words
 countWords :: Text -> Int
-countWords t = undefined
+countWords  = length . T.words
 
 -- | 轉成網址 slug:全小寫、空白換成 '-'、
 -- 只保留英數字與 '-'。
@@ -34,16 +34,24 @@ countWords t = undefined
 --
 -- 提示:T.toLower、T.map 或 T.words + T.intercalate、T.filter
 slugify :: Text -> Text
-slugify t = undefined
+slugify =
+  T.intercalate "-"
+    . filter (not . T.null)
+    . map (T.filter isAlphaNum)
+    . T.words
+    . T.toLower
 
 -- | 戰鬥訊息:"<攻擊者> 對 <目標> 造成 <n> 點傷害"
 --
 -- >>> attackMessage "Hero" "Slime" 12
 -- "Hero \23545 ... "  -- (中文訊息,見測試)
 attackMessage :: Text -> Text -> Int -> Text
-attackMessage attacker target dmg = undefined
+attackMessage attacker target dmg =
+   attacker <> " 對 " <> target <> " 造成 " <> tshow  dmg <> " 點傷害"
+  where
+    tshow = T.pack . show
 
 -- | 統計每個單字出現次數。
 -- 提示:Map.fromListWith (+) 搭配 [(w, 1) | w <- ...]
 wordFreq :: Text -> Map Text Int
-wordFreq t = undefined
+wordFreq t = Map.fromListWith (+) [(w, 1) | w <- T.words t]

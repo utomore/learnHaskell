@@ -11,6 +11,7 @@ module Exercises.E07IO
 
 import Data.Map.Strict (Map)
 import Data.Map.Strict qualified as Map
+import Data.Maybe (mapMaybe)
 import Data.Text (Text)
 import Data.Text qualified as T
 
@@ -21,7 +22,12 @@ import Data.Text qualified as T
 --
 -- 提示:T.lines、zip [1..]、T.unlines
 numberLines :: Text -> Text
-numberLines t = undefined
+numberLines t =
+  T.unlines
+    [ T.pack (show i) <> ": " <> line
+    | (i, line) <- zip [(1 :: Int) ..] (T.lines t)
+    ]
+
 
 -- | 解析 "key=value" 一行設定;沒有 '=' 回 Nothing。
 -- 鍵與值前後的空白要去掉(T.strip)。
@@ -32,9 +38,12 @@ numberLines t = undefined
 -- 提示:T.breakOn "=" 會切成 ("name ", "= Hero"),
 -- 再用 T.stripPrefix "=" 或 T.drop 1 處理後半。
 parseKeyValue :: Text -> Maybe (Text, Text)
-parseKeyValue line = undefined
+parseKeyValue line = 
+  case T.breakOn "=" line of 
+    (_, "") -> Nothing
+    (key, rest) -> Just (T.strip key, T.strip (T.drop 1 rest))
 
 -- | 解析整份設定檔:每行一個 key=value,
 -- 解析失敗的行直接略過。提示:mapMaybe、Map.fromList
 parseConfig :: Text -> Map Text Text
-parseConfig content = undefined
+parseConfig = Map.fromList . mapMaybe parseKeyValue . T.lines

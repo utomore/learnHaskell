@@ -20,32 +20,38 @@ module Exercises.E01Basics
 -- >>> hitPoints 20 50
 -- 0
 hitPoints :: Int -> Int -> Int
-hitPoints hp dmg = undefined
+hitPoints hp dmg = max 0 (hp - dmg)
 
 -- | 2D 平面上兩點 (x1,y1) (x2,y2) 的距離。提示:sqrt
 --
 -- >>> distance 0 0 3 4
 -- 5.0
 distance :: Double -> Double -> Double -> Double -> Double
-distance x1 y1 x2 y2 = undefined
+distance x1 y1 x2 y2 = sqrt (dx + dy)
+  where
+    dx = (x1 - x2)^2
+    dy = (y1 - y2)^2
 
 -- | 升到下一級需要的經驗值:等級 * 100 + 50。
 --
 -- >>> xpForNextLevel 3
 -- 350
 xpForNextLevel :: Int -> Int
-xpForNextLevel level = undefined
+xpForNextLevel level = level * 100 + 50
 
 -- | 骰出 95(含)以上就是暴擊。
 --
 -- >>> isCritical 97
 -- True
 isCritical :: Int -> Bool
-isCritical roll = undefined
+isCritical roll = roll >= 95
 
 -- | 把秒數換算成 (時, 分, 秒)。提示:div 與 mod
 --
 -- >>> secondsToHms 3725
 -- (1,2,5)
 secondsToHms :: Int -> (Int, Int, Int)
-secondsToHms total = undefined
+secondsToHms total = (h, m, s)
+  where
+    (h, rest) = total `divMod` 3600
+    (m, s) = rest `divMod` 60

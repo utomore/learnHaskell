@@ -12,29 +12,32 @@ module Exercises.E03Lists
 
 -- | 用「顯式遞迴」實作 length(不要呼叫 length)。
 myLength :: [a] -> Int
-myLength xs = undefined
+myLength [] = 0
+myLength (_:xs) = 1 + myLength xs
 
 -- | 用顯式遞迴實作 reverse(不要呼叫 reverse;效率差沒關係)。
 myReverse :: [a] -> [a]
-myReverse xs = undefined
+myReverse [] = []
+myReverse (x:xs) = myReverse xs ++ [x]
 
 -- | head 是 partial function(空 list 會爆炸),已是淘汰習慣。
 -- 寫出 total 的版本:空 list 回傳 Nothing。
 safeHead :: [a] -> Maybe a
-safeHead xs = undefined
+safeHead [] = Nothing
+safeHead (x:_) = Just (x)
 
 -- | 加總傷害。請用 foldl'(嚴格左摺,2026 的預設選擇;
 -- 不要用 foldl —— 它會累積 thunk 造成 space leak)。
 totalDamage :: [Int] -> Int
-totalDamage hits = undefined
+totalDamage hits = foldl' (+) 0 hits
 
 -- | 數出還活著(HP > 0)的敵人數量。提示:filter 與 length
 aliveCount :: [Int] -> Int
-aliveCount hps = undefined
+aliveCount hps = (length . filter (>0)) hps
 
 -- | 幫每個元素標上從 0 開始的索引。提示:zip
 --
 -- >>> zipWithIndex "abc"
 -- [(0,'a'),(1,'b'),(2,'c')]
 zipWithIndex :: [a] -> [(Int, a)]
-zipWithIndex xs = undefined
+zipWithIndex xs = zip [0..] xs

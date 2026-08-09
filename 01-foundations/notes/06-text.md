@@ -63,6 +63,7 @@ import Data.Map.Strict qualified as Map
 wordFreq :: Text -> Map Text Int
 wordFreq t = Map.fromListWith (+) [(w, 1) | w <- T.words t]
 ```
+如果遇到重複的 Key（單字），不要覆蓋，請把它們的 Value（數值）拿來相加（(+)）！
 
 `Map.lookup :: k -> Map k v -> Maybe v` —— 又是 `Maybe`,查不到不會爆炸。
 
