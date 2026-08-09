@@ -1,8 +1,8 @@
 packages:
   01-foundations
+  02-intermediate
 
 -- 之後每完成一級就加入對應套件:
---   02-intermediate
 --   03-advanced
 --   04-effects
 --   05-games/terminal-snake      (純 Haskell game loop)

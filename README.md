@@ -9,7 +9,7 @@
 |------|------|------|------|
 | 0 環境 | `00-setup/` | GHCup、cabal、HLS、ghci、格式化與 lint | ✅ |
 | 1 初級 | `01-foundations/` | 型別、函式、ADT、typeclass、Text、IO、cabal 專案 | ✅ |
-| 2 中級 | `02-intermediate/` | Functor/Applicative/Monad(以 laws 教)、惰性求值與 space leak、現代錯誤處理、測試(hspec + falsify)、async/STM | 🚧 規劃中 |
+| 2 中級 | `02-intermediate/` | Functor/Applicative/Monad(以 laws 教)、惰性求值與 space leak、現代錯誤處理、測試(hspec + hedgehog)、async/STM、transformers 識讀 | ✅ |
 | 3 高級 | `03-advanced/` | GADTs、type families、DerivingVia、optics、streaming、效能調校 | 🚧 規劃中 |
 | 4 進階 | `04-effects/` | Effect System 專章:effectful 為主、bluefin 對照、自訂 effect、選型史 | 🚧 規劃中 |
 | 5 應用 | `05-games/` | **遊戲開發與 ECS**:終端 game loop → apecs ECS → 完整 2D 遊戲 | 🚧 規劃中 |
@@ -51,8 +51,8 @@ cabal test level01-foundations -f solutions
 
 **採用:** GHC2024、cabal + GHCup + HLS、`Text` 為預設字串型別、
 `foldl'` 與嚴格求值習慣、total functions、`OverloadedRecordDot` + `NoFieldSelectors`、
-effectful/bluefin 系 effect system、`async`/STM/ki 並行、hspec + falsify 測試、
-apecs ECS 遊戲架構。
+effectful/bluefin 系 effect system、`async`/STM/ki 並行、
+hspec + hedgehog 屬性測試(並介紹 falsify)、apecs ECS 遊戲架構。
 
 **不教(已淘汰):** monad 比喻教學法(burrito)、lazy IO、`String` 為預設、
 `head`/`tail` 等 partial functions 習慣、深層 transformer stack 作為架構建議、
