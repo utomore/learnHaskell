@@ -14,7 +14,9 @@ import Data.Text (Text)
 -- 前一步是 Nothing 就整串放棄,否則把值餵給下一步。
 -- (實作完你就知道 Maybe monad 沒有任何魔法)
 andThen :: Maybe a -> (a -> Maybe b) -> Maybe b
-andThen ma f = undefined
+andThen ma f = case ma of
+  Nothing -> Nothing
+  (Just x) -> (f x)
 
 -- | 查兩層:英雄裝備哪把武器?那把武器攻擊力多少?
 -- 任何一層查不到就 Nothing。
@@ -25,8 +27,12 @@ weaponDamage
   -> Map Text Int    -- ^ 武器 → 攻擊力
   -> Text            -- ^ 英雄名
   -> Maybe Int
-weaponDamage equips stats hero = undefined
+weaponDamage equips stats hero = do
+  weapon <- Map.lookup hero equips 
+  prop_attack <- Map.lookup weapon stats
+  pure (prop_attack)
 
+  
 -- | 所有組合(list monad):
 --
 -- >>> allPairs [1,2] "ab"
@@ -34,9 +40,16 @@ weaponDamage equips stats hero = undefined
 --
 -- 用 do 記法寫:x <- xs; y <- ys; pure (x, y)
 allPairs :: [a] -> [b] -> [(a, b)]
-allPairs xs ys = undefined
+allPairs xs ys = do
+  x <- xs
+  y <- ys
+  pure (x, y)
 
 -- | 平均傷害:空清單回 Nothing(不能除以 0!)。
 -- 提示:fromIntegral 把 Int 轉 Double。
 avgDamage :: [Int] -> Maybe Double
-avgDamage hits = undefined
+avgDamage [] = Nothing
+avgDamage hits = Just (fromIntegral total / fromIntegral count)
+  where
+    total = sum hits
+    count = length hits

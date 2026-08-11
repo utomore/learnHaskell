@@ -14,7 +14,8 @@ data Chest a = EmptyChest | Chest a
 -- | 為 Chest 實作 Functor。
 -- law:fmap id = id、fmap (f . g) = fmap f . fmap g(測試會抽查)
 instance Functor Chest where
-  fmap = undefined
+  fmap _ EmptyChest = EmptyChest
+  fmap f (Chest x) = Chest (f x)
 
 -- | 一對同型別的值(例如雙持武器)。
 data Pair a = Pair a a
@@ -22,7 +23,7 @@ data Pair a = Pair a a
 
 -- | 為 Pair 實作 Functor:兩個位置都要套用。
 instance Functor Pair where
-  fmap = undefined
+  fmap f (Pair a b) = Pair (f a) (f b)
 
 -- | 對「任何 Functor 容器」裡的每個數值 +n。
 -- 同一份程式碼要能用在 []、Maybe、Chest、Pair……
@@ -33,4 +34,4 @@ instance Functor Pair where
 -- >>> buffAll 5 (Just 10)
 -- Just 15
 buffAll :: Functor f => Int -> f Int -> f Int
-buffAll n xs = undefined
+buffAll n xs = fmap (+n) xs

@@ -24,7 +24,7 @@ import Data.Text.Read qualified as TR
 -- >>> openAll [Just 1, Nothing]
 -- Nothing
 openAll :: [Maybe a] -> Maybe [a]
-openAll chests = undefined
+openAll = sequenceA
 
 -- | (送你)Text 轉 Int,用 text 套件內建的 reader。
 readInt :: Text -> Maybe Int
@@ -35,7 +35,7 @@ readInt t = case TR.signed TR.decimal (T.strip t) of
 -- | 解析一排數字,任何一個失敗就整體失敗。
 -- 提示:traverse readInt(traverse = map + sequenceA 一次做完)
 parseAllInts :: [Text] -> Maybe [Int]
-parseAllInts ts = undefined
+parseAllInts = traverse readInt 
 
 data Adventurer = Adventurer
   { name :: Text
@@ -48,8 +48,8 @@ data Adventurer = Adventurer
 -- 提示:foldMap (Sum . (.gold)) 之後 getSum,
 -- 或者直接 sum(sum 本身就是用 Foldable 定義的)。
 partyGold :: [Adventurer] -> Int
-partyGold party = undefined
+partyGold = getSum . foldMap (Sum . (.gold))
 
 -- | 全隊都活著(HP > 0)嗎?提示:all
 allAlive :: [Adventurer] -> Bool
-allAlive party = undefined
+allAlive = all ((>0) . (.hp))
