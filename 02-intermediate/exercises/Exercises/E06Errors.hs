@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 -- | 第 6 章習題:現代錯誤處理
 --
 -- 領域錯誤 → Either + ADT;IO 失敗 → exception,在邊界 try 起來。
@@ -42,7 +43,13 @@ readInt t = case TR.signed TR.decimal (T.strip t) of
 -- * ["rest"]                      → Rest
 -- * 其他                          → UnknownCommand 原始行
 parseCommand :: Text -> Either GameError Command
-parseCommand line = undefined
+parseCommand line = case (T.words . T.strip) line of
+  ["move", argX, argY] -> case (readInt argX, readInt argY) of
+    (Just a, Just b) -> Right (Move a b)
+    _ -> Left (BadArguments line)
+  ["attack", target] -> Right (Attack target)
+  ["rest"] -> Right Rest
+  _ -> Left (UnknownCommand line)
 
 -- | 給玩家看的錯誤訊息:
 --
@@ -50,10 +57,16 @@ parseCommand line = undefined
 -- * BadArguments c   → "參數錯誤:" <> c
 -- * FileError p      → "讀檔失敗:" <> p
 renderError :: GameError -> Text
-renderError err = undefined
+renderError (UnknownCommand c) = "未知指令:" <> c
+renderError (BadArguments c) = "參數錯誤:" <> c
+renderError (FileError p) = "讀檔失敗:" <> p
 
 -- | 讀檔,把 IOException 收編成我們的領域錯誤。
 -- 提示:try (TIO.readFile path) 的結果是
 -- Either IOException Text,把 Left 換成 FileError (T.pack path)。
 safeReadFile :: FilePath -> IO (Either GameError Text)
-safeReadFile path = undefined
+safeReadFile path = do
+  result <- try @IOException (TIO.readFile path)
+  pure $ case result of
+    Right content -> Right content
+    Left _ -> Left (FileError (T.pack path))
