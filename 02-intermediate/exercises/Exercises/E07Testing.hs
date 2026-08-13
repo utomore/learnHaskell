@@ -11,9 +11,14 @@ module Exercises.E07Testing
 -- | 把 x 插入「已排序」的 list,結果仍然要排好序。
 -- 性質:輸出有序、長度 +1、x 在輸出裡。
 insertSorted :: Int -> [Int] -> [Int]
-insertSorted x sorted = undefined
+insertSorted x [] = [x]
+insertSorted x (s:sx)
+  | x <= s = x : s : sx
+  | otherwise = s : insertSorted x sx 
 
 -- | 自己實作 replicate。
 -- 性質:長度 = max 0 n、每個元素都等於 x。
 myReplicate :: Int -> a -> [a]
-myReplicate n x = undefined
+myReplicate n x
+ | n <= 0 = []
+ | otherwise = x : (myReplicate (n-1) x)

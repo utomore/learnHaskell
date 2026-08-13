@@ -21,6 +21,8 @@ import Exercises.E08Concurrency
 import Hedgehog (assert, forAll, (===))
 import Hedgehog.Gen qualified as Gen
 import Hedgehog.Range qualified as Range
+import GHC.IO.Encoding (setLocaleEncoding, utf8)
+import System.IO (hSetEncoding, stderr, stdout)
 import Test.Hspec
 import Test.Hspec.Hedgehog (hedgehog)
 
@@ -28,7 +30,18 @@ isSorted :: [Int] -> Bool
 isSorted xs = and (zipWith (<=) xs (drop 1 xs))
 
 main :: IO ()
-main = hspec $ do
+main = do
+  -- Windows 的預設編碼是 console codepage(CP950),會造成兩個問題:
+  -- 1. 中文測試名稱輸出成亂碼
+  -- 2. TIO.readFile 用 CP950 解碼 UTF-8 檔案 → 丟 IOException
+  -- 統一改成 UTF-8(setLocaleEncoding 管之後開的 handle,含 readFile)。
+  setLocaleEncoding utf8
+  hSetEncoding stdout utf8
+  hSetEncoding stderr utf8
+  hspec spec
+
+spec :: Spec
+spec = do
   describe "E01 Functor" $ do
     it "Chest:fmap 套用到內容" $ fmap (+ 1) (Chest (1 :: Int)) `shouldBe` Chest 2
     it "Chest:空箱維持空箱" $ fmap (+ 1) (EmptyChest :: Chest Int) `shouldBe` EmptyChest

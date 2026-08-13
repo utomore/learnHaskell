@@ -12,10 +12,20 @@ import Exercises.E04Adts
 import Exercises.E05Classes
 import Exercises.E06Text
 import Exercises.E07IO
+import GHC.IO.Encoding (setLocaleEncoding, utf8)
+import System.IO (hSetEncoding, stderr, stdout)
 import Test.Hspec
 
 main :: IO ()
-main = hspec $ do
+main = do
+  -- Windows 預設用 console codepage(CP950)輸出,中文會變亂碼,統一改 UTF-8
+  setLocaleEncoding utf8
+  hSetEncoding stdout utf8
+  hSetEncoding stderr utf8
+  hspec spec
+
+spec :: Spec
+spec = do
   describe "E01 基本運算式" $ do
     it "hitPoints:正常扣血" $ hitPoints 100 30 `shouldBe` 70
     it "hitPoints:不低於 0" $ hitPoints 20 50 `shouldBe` 0
