@@ -1,9 +1,9 @@
 packages:
   01-foundations
   02-intermediate
+  03-advanced
 
 -- 之後每完成一級就加入對應套件:
---   03-advanced
 --   04-effects
 --   05-games/terminal-snake      (純 Haskell game loop)
 --   05-games/ecs-playground      (apecs ECS 入門)

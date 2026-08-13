@@ -10,7 +10,7 @@
 | 0 環境 | `00-setup/` | GHCup、cabal、HLS、ghci、格式化與 lint | ✅ |
 | 1 初級 | `01-foundations/` | 型別、函式、ADT、typeclass、Text、IO、cabal 專案 | ✅ |
 | 2 中級 | `02-intermediate/` | Functor/Applicative/Monad(以 laws 教)、惰性求值與 space leak、現代錯誤處理、測試(hspec + hedgehog)、async/STM、transformers 識讀 | ✅ |
-| 3 高級 | `03-advanced/` | GADTs、type families、DerivingVia、optics、streaming、效能調校 | 🚧 規劃中 |
+| 3 高級 | `03-advanced/` | Phantom types/DataKinds、GADTs、type families、DerivingVia、optics、streaming、效能調校 | ✅ |
 | 4 進階 | `04-effects/` | Effect System 專章:effectful 為主、bluefin 對照、自訂 effect、選型史 | 🚧 規劃中 |
 | 5 應用 | `05-games/` | **遊戲開發與 ECS**:終端 game loop → apecs ECS → 完整 2D 遊戲 | 🚧 規劃中 |
 
