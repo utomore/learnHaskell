@@ -20,7 +20,7 @@
 
 ```powershell
 cabal repl level02-intermediate    # 跟著教材實驗
-cabal test level02-intermediate    # 驗收(54 個測試全綠 = 通關)
+cabal test level02-intermediate    # 驗收(全綠 = 通關)
 cabal test level02-intermediate -f solutions   # 用參考解答驗證測試
 ```
 

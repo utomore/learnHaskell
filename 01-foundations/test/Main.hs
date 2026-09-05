@@ -12,6 +12,8 @@ import Exercises.E04Adts
 import Exercises.E05Classes
 import Exercises.E06Text
 import Exercises.E07IO
+import Exercises.E08Everyday
+import Data.List.NonEmpty (NonEmpty (..))
 import GHC.IO.Encoding (setLocaleEncoding, utf8)
 import System.IO (hSetEncoding, stderr, stdout)
 import Test.Hspec
@@ -112,3 +114,27 @@ spec = do
     it "parseConfig" $
       parseConfig "name=Hero\n這行壞掉了\nhp = 100"
         `shouldBe` Map.fromList [("name", "Hero"), ("hp", "100")]
+
+  describe "E08 日常語法" $ do
+    it "parseInt:正常" $ parseInt "42" `shouldBe` Just 42
+    it "parseInt:前後空白" $ parseInt "  7  " `shouldBe` Just 7
+    it "parseInt:壞輸入回 Nothing(不是炸掉)" $ parseInt "42x" `shouldBe` Nothing
+    it "parseCommand:move" $ parseCommand "move 3" `shouldBe` Just (Move 3)
+    it "parseCommand:大小寫不分" $ parseCommand "ATTACK bat" `shouldBe` Just (Attack "bat")
+    it "parseCommand:rest" $ parseCommand "rest" `shouldBe` Just Rest
+    it "parseCommand:quit 與 exit 都是 Quit" $ do
+      parseCommand "quit" `shouldBe` Just Quit
+      parseCommand "exit" `shouldBe` Just Quit
+    it "parseCommand:move 的數字壞掉 → 整條失敗" $ parseCommand "move x" `shouldBe` Nothing
+    it "parseCommand:未知指令" $ parseCommand "dance" `shouldBe` Nothing
+    it "strongest:NonEmpty 保證有答案" $
+      strongest (Monster "slime" 1 :| [Monster "dragon" 90, Monster "bat" 5])
+        `shouldBe` Monster "dragon" 90
+    it "partyLeader:有人" $
+      partyLeader [Monster "a" 3, Monster "b" 9] `shouldBe` Just (Monster "b" 9)
+    it "partyLeader:空隊伍回 Nothing" $ partyLeader [] `shouldBe` Nothing
+    it "parseAll:壞的直接丟掉" $ parseAll ["1", "x", " 3 ", ""] `shouldBe` [1, 3]
+    it "describePower:分級" $ do
+      describePower 150 `shouldBe` "傳說"
+      describePower 50 `shouldBe` "強敵"
+      describePower 49 `shouldBe` "雜魚"

@@ -13,6 +13,7 @@ flag solutions
 common settings
   default-language:   GHC2024
   default-extensions: OverloadedStrings
+                      NoFieldSelectors
                       OverloadedRecordDot
   ghc-options:        -Wall -Wcompat
                       -Wincomplete-uni-patterns
@@ -37,6 +38,7 @@ library
                    Exercises.E05Classes
                    Exercises.E06Text
                    Exercises.E07IO
+                   Exercises.E08Everyday
 
 executable wordcount
   import:         settings

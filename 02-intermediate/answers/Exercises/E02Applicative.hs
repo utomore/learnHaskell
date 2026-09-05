@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 2 章參考解答
 module Exercises.E02Applicative

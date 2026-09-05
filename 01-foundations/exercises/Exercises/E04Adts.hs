@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 4 章習題:代數資料型別(ADT)與現代 record
 --

@@ -12,6 +12,7 @@ flag solutions
 common settings
   default-language:   GHC2024
   default-extensions: OverloadedStrings
+                      NoFieldSelectors
                       OverloadedRecordDot
   ghc-options:        -Wall -Wcompat
                       -Wincomplete-uni-patterns
@@ -19,6 +20,8 @@ common settings
   build-depends:      base >=4.20 && <5
                     , text
                     , containers
+                    , optics-core >=0.4
+                    , streamly-core >=0.3
 
 library
   import:          settings
@@ -33,6 +36,9 @@ library
                    Exercises.E05Optics
                    Exercises.E06Streaming
                    Exercises.E07Performance
+                   Exercises.E08OpticsLib
+                   Exercises.E09Streamly
+                   Exercises.E10ModernSyntax
 
 test-suite level03-tests
   import:         settings
