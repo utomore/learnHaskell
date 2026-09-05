@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 5 章參考解答
 module Exercises.E05Classes

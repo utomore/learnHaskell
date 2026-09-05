@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 5 章習題:typeclass、Semigroup/Monoid、deriving strategies
 module Exercises.E05Classes

@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 4 章習題:Foldable 與 Traversable
 module Exercises.E04Traverse

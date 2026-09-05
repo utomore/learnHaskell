@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 {-# LANGUAGE OverloadedStrings #-}
 -- | 第 2 章習題:Applicative
 module Exercises.E02Applicative

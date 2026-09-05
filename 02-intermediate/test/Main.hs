@@ -35,6 +35,7 @@ main = do
   -- 1. 中文測試名稱輸出成亂碼
   -- 2. TIO.readFile 用 CP950 解碼 UTF-8 檔案 → 丟 IOException
   -- 統一改成 UTF-8(setLocaleEncoding 管之後開的 handle,含 readFile)。
+  -- hedgehog 失敗時會重新讀取這個原始碼檔來顯示反例位置,也走同一個編碼。
   setLocaleEncoding utf8
   hSetEncoding stdout utf8
   hSetEncoding stderr utf8

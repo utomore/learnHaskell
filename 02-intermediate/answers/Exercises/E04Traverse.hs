@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 4 章參考解答
 module Exercises.E04Traverse

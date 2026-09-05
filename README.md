@@ -8,15 +8,23 @@
 | 級別 | 目錄 | 主題 | 狀態 |
 |------|------|------|------|
 | 0 環境 | `00-setup/` | GHCup、cabal、HLS、ghci、格式化與 lint | ✅ |
-| 1 初級 | `01-foundations/` | 型別、函式、ADT、typeclass、Text、IO、cabal 專案 | ✅ |
+| 1 初級 | `01-foundations/` | 型別、函式、ADT、typeclass、Text、IO、日常語法(TypeApplications/readMaybe/NonEmpty)、cabal 專案 | ✅ |
 | 2 中級 | `02-intermediate/` | Functor/Applicative/Monad(以 laws 教)、惰性求值與 space leak、現代錯誤處理、測試(hspec + hedgehog)、async/STM、transformers 識讀 | ✅ |
-| 3 高級 | `03-advanced/` | Phantom types/DataKinds、GADTs、type families、DerivingVia、optics、streaming、效能調校 | ✅ |
+| 3 高級 | `03-advanced/` | Phantom types/DataKinds、GADTs、type families、DerivingVia、optics(原理 + optics-core)、streaming(原理 + streamly-core)、效能調校、GHC 9.10–9.14 新語法 | ✅ |
 | 4 進階 | `04-effects/` | Effect System 專章:effectful 為主、bluefin 對照、自訂 effect、選型史 | 🚧 規劃中 |
 | 5 應用 | `05-games/` | **遊戲開發與 ECS**:終端 game loop → apecs ECS → 完整 2D 遊戲 | 🚧 規劃中 |
 
 Level 5 為遊戲開發導向:先用純 Haskell 寫終端小遊戲練 game loop 與狀態管理,
 再進入 **apecs**(Haskell 主流 Entity-Component-System 函式庫)與 2D 渲染,
 最終整合 effect system 打造一個完整的小型遊戲。
+
+## 教材的寫法
+
+每一章的 `notes/` 都用同一個骨架:先給**問題**、再給**解法**,接著是
+**來龍去脈**(舊做法是什麼、當年為什麼那樣設計、出了什麼問題、新做法取代了什麼、
+哪裡還會看到舊寫法)、**你會看到的錯誤訊息**(GHC 9.14.1 實際輸出與讀法)、
+**ghci 實驗**、**常見誤區**、**2026 實務準則**、**習題**。
+凡是講到 laws 的章節都把 laws 全文寫出來,並附一個違反 law 的反例。
 
 ## 如何使用
 

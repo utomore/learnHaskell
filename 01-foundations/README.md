@@ -13,13 +13,14 @@
 | 5 Typeclass 與 Monoid | `notes/05-typeclasses.md` | `E05Classes.hs` |
 | 6 Text | `notes/06-text.md` | `E06Text.hs` |
 | 7 IO | `notes/07-io.md` | `E07IO.hs` |
-| 8 模組與 cabal | `notes/08-modules-and-cabal.md` | (結業檢查) |
+| 8 日常語法 | `notes/08-everyday-syntax.md` | `E08Everyday.hs` |
+| 9 模組與 cabal | `notes/09-modules-and-cabal.md` | (結業檢查) |
 
 ## 使用方式
 
 ```powershell
 cabal repl level01-foundations    # 開 ghci 跟著教材實驗
-cabal test level01-foundations    # 驗收習題(58 個測試全綠 = 通關)
+cabal test level01-foundations    # 驗收習題(72 個測試全綠 = 通關)
 cabal run wordcount -- notes/01-first-steps.md   # 第 7 章的範例程式
 ```
 

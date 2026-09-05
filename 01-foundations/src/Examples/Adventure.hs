@@ -1,4 +1,3 @@
-{-# LANGUAGE NoFieldSelectors #-}
 
 -- | 第 4、5 章的示範程式:用一個小小的冒險遊戲領域,
 -- 展示 ADT、record(現代寫法)、deriving strategies 與 typeclass。

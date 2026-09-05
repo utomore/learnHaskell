@@ -12,6 +12,7 @@ flag solutions
 common settings
   default-language:   GHC2024
   default-extensions: OverloadedStrings
+                      NoFieldSelectors
                       OverloadedRecordDot
   ghc-options:        -Wall -Wcompat
                       -Wincomplete-uni-patterns
